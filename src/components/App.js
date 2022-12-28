@@ -4,7 +4,11 @@ import Bookshelf from './Bookshelf';
 import { getAll } from '../BooksAPI';
 
 function App() {
-  const shelfs = ['Currently Reading', 'Want to Read', 'Read'];
+  const shelfs = [
+    { title: 'Currently Reading', status: 'currentlyReading' },
+    { title: 'Want to Read', status: 'wantToRead' },
+    { title: 'Read', status: 'read' },
+  ];
   const [showSearchPage, setShowSearchpage] = useState(false);
   const [books, setBooks] = useState([]);
 
@@ -15,7 +19,7 @@ function App() {
     };
     getBooks();
   }, []);
-
+  console.log(books);
   return (
     <div className='app'>
       {showSearchPage ? (
@@ -45,8 +49,12 @@ function App() {
           </div>
           <div className='list-books-content'>
             <div>
-              {shelfs.map((shelf, i) => (
-                <Bookshelf key={i} bookshelfTitle={shelf} />
+              {shelfs.map((shelf) => (
+                <Bookshelf
+                  key={shelf.title}
+                  bookshelfTitle={shelf.title}
+                  books={books.filter((book) => shelf.status === book.shelf)}
+                />
               ))}
             </div>
           </div>
