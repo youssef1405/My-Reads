@@ -1,7 +1,7 @@
 import '../App.css';
 import { useState, useEffect } from 'react';
 import Bookshelf from './Bookshelf';
-import { getAll } from '../BooksAPI';
+import { getAll, update } from '../BooksAPI';
 
 function App() {
   const shelfs = [
@@ -12,14 +12,21 @@ function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
   const [books, setBooks] = useState([]);
 
+  const getBooks = async () => {
+    const res = await getAll();
+    setBooks(res);
+  };
+
   useEffect(() => {
-    const getBooks = async () => {
-      const res = await getAll();
-      setBooks(res);
-    };
     getBooks();
   }, []);
   console.log(books);
+
+  const changeShelf = async (book, shelf) => {
+    await update(book, shelf);
+    getBooks();
+  };
+
   return (
     <div className='app'>
       {showSearchPage ? (
@@ -54,6 +61,7 @@ function App() {
                   key={shelf.title}
                   bookshelfTitle={shelf.title}
                   books={books.filter((book) => shelf.status === book.shelf)}
+                  changeShelf={changeShelf}
                 />
               ))}
             </div>
