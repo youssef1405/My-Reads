@@ -39,7 +39,7 @@ function App() {
   return (
     <div className='app'>
       {showSearchPage ? (
-        <SearchBooks closeSearch={showCloseSearch} />
+        <SearchBooks closeSearch={showCloseSearch} changeShelf={changeShelf} />
       ) : (
         <div className='list-books'>
           <div className='list-books-title'>
