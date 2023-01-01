@@ -1,7 +1,9 @@
 import '../App.css';
 import { useState, useEffect } from 'react';
 import Bookshelf from './Bookshelf';
+import SearchBooks from './SearchBooks';
 import { getAll, update } from '../BooksAPI';
+import OpenSearch from './OpenSearch';
 
 function App() {
   const shelfs = [
@@ -27,28 +29,17 @@ function App() {
     getBooks();
   };
 
+  /**
+   * this function toggles between the home page and search page
+   */
+  const showCloseSearch = () => {
+    setShowSearchpage((prevShow) => !prevShow);
+  };
+
   return (
     <div className='app'>
       {showSearchPage ? (
-        <div className='search-books'>
-          <div className='search-books-bar'>
-            <a
-              className='close-search'
-              onClick={() => setShowSearchpage(!showSearchPage)}
-            >
-              Close
-            </a>
-            <div className='search-books-input-wrapper'>
-              <input
-                type='text'
-                placeholder='Search by title, author, or ISBN'
-              />
-            </div>
-          </div>
-          <div className='search-books-results'>
-            <ol className='books-grid'></ol>
-          </div>
-        </div>
+        <SearchBooks closeSearch={showCloseSearch} />
       ) : (
         <div className='list-books'>
           <div className='list-books-title'>
@@ -66,9 +57,7 @@ function App() {
               ))}
             </div>
           </div>
-          <div className='open-search'>
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
-          </div>
+          <OpenSearch openSearch={showCloseSearch} />
         </div>
       )}
     </div>
