@@ -1,6 +1,6 @@
 import ShelfChanger from './ShelfChanger';
 
-const Book = ({ book, changeShelf }) => {
+const Book = ({ book, changeShelf, shelf }) => {
   return (
     <div className='book'>
       <div className='book-top'>
@@ -12,11 +12,7 @@ const Book = ({ book, changeShelf }) => {
             backgroundImage: `url("${book.imageLinks.thumbnail}")`,
           }}
         ></div>
-        <ShelfChanger
-          shelf={book.shelf}
-          changeShelf={changeShelf}
-          book={book}
-        />
+        <ShelfChanger shelf={shelf} changeShelf={changeShelf} book={book} />
       </div>
       <div className='book-title'>{book.title}</div>
       <div className='book-authors'>
