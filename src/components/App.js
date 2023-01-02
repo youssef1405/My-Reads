@@ -1,9 +1,9 @@
 import '../App.css';
 import { useState, useEffect } from 'react';
-import Bookshelf from './Bookshelf';
-import SearchBooks from './SearchBooks';
 import { getAll, update } from '../BooksAPI';
-import OpenSearch from './OpenSearch';
+import Home from '../pages/Home';
+import Search from '../pages/Search';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const shelfs = [
@@ -11,7 +11,6 @@ function App() {
     { title: 'Want to Read', status: 'wantToRead' },
     { title: 'Read', status: 'read' },
   ];
-  const [showSearchPage, setShowSearchpage] = useState(false);
   const [books, setBooks] = useState([]);
 
   const getBooks = async () => {
@@ -29,41 +28,20 @@ function App() {
     getBooks();
   };
 
-  /**
-   * this function toggles between the home page and search page
-   */
-  const showCloseSearch = () => {
-    setShowSearchpage((prevShow) => !prevShow);
-  };
-
   return (
     <div className='app'>
-      {showSearchPage ? (
-        <SearchBooks
-          closeSearch={showCloseSearch}
-          changeShelf={changeShelf}
-          mainBooks={books}
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <Home shelfs={shelfs} books={books} changeShelf={changeShelf} />
+          }
         />
-      ) : (
-        <div className='list-books'>
-          <div className='list-books-title'>
-            <h1>MyReads</h1>
-          </div>
-          <div className='list-books-content'>
-            <div>
-              {shelfs.map((shelf) => (
-                <Bookshelf
-                  key={shelf.title}
-                  bookshelfTitle={shelf.title}
-                  books={books.filter((book) => shelf.status === book.shelf)}
-                  changeShelf={changeShelf}
-                />
-              ))}
-            </div>
-          </div>
-          <OpenSearch openSearch={showCloseSearch} />
-        </div>
-      )}
+        <Route
+          path='/search'
+          element={<Search changeShelf={changeShelf} mainBooks={books} />}
+        />
+      </Routes>
     </div>
   );
 }

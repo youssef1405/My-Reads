@@ -1,26 +1,26 @@
 import { useState, useEffect } from 'react';
 import { search } from '../BooksAPI';
-import Book from './Book';
+import Book from '../components/Book';
+import { Link } from 'react-router-dom';
 
-const SearchBooks = ({ closeSearch, changeShelf, mainBooks }) => {
+const Search = ({ changeShelf, mainBooks }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [query, setQuery] = useState('');
 
-  const searchBook = async () => {
-    try {
-      if (query) {
-        const books = await search(query);
-        console.log(books);
-        setSearchResults(books);
-      } else {
-        setSearchResults([]);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const searchBook = async () => {
+      try {
+        if (query) {
+          const books = await search(query);
+          console.log(books);
+          setSearchResults(books);
+        } else {
+          setSearchResults([]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     searchBook();
   }, [query]);
 
@@ -35,9 +35,9 @@ const SearchBooks = ({ closeSearch, changeShelf, mainBooks }) => {
   return (
     <div className='search-books'>
       <div className='search-books-bar'>
-        <a className='close-search' onClick={closeSearch}>
+        <Link to='/' className='close-search'>
           Close
-        </a>
+        </Link>
         <div className='search-books-input-wrapper'>
           <input
             type='text'
@@ -70,4 +70,4 @@ const SearchBooks = ({ closeSearch, changeShelf, mainBooks }) => {
   );
 };
 
-export default SearchBooks;
+export default Search;
