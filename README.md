@@ -17,9 +17,19 @@ A bookshelf app that allows you to select and categorize books you have read, ar
 - React
 - Hooks
 - React Router
+- PropTypes
 - CSS
 
 ## Screenshots
+
+### Main Page
+
+![image](https://user-images.githubusercontent.com/18706769/210251754-0cff7653-3432-4738-bede-7007c5277169.png)
+
+### Search Page
+
+![image](https://user-images.githubusercontent.com/18706769/210251850-49eec83d-ef00-4215-bbae-7e9ea58be048.png)
+
 
 ## Backend Server
 
