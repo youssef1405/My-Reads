@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ShelfChanger = ({ shelf, changeShelf, book }) => {
   const handleChange = (e) => {
     changeShelf(book, e.target.value);
@@ -13,6 +15,12 @@ const ShelfChanger = ({ shelf, changeShelf, book }) => {
       </select>
     </div>
   );
+};
+
+ShelfChanger.propTypes = {
+  shelf: PropTypes.string.isRequired,
+  changeShelf: PropTypes.func.isRequired,
+  book: PropTypes.object.isRequired,
 };
 
 export default ShelfChanger;

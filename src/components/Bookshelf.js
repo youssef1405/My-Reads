@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import BookList from './BookList';
 
 const Bookshelf = ({ bookshelfTitle, books, changeShelf }) => {
@@ -9,6 +10,12 @@ const Bookshelf = ({ bookshelfTitle, books, changeShelf }) => {
       </div>
     </div>
   );
+};
+
+Bookshelf.propTypes = {
+  bookshelfTitle: PropTypes.string.isRequired,
+  books: PropTypes.array.isRequired,
+  changeShelf: PropTypes.func.isRequired,
 };
 
 export default Bookshelf;
