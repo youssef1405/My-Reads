@@ -1,7 +1,12 @@
 import Bookshelf from '../components/Bookshelf';
 import OpenSearch from '../components/OpenSearch';
 
-function Home({ shelfs, books, changeShelf, openSearch }) {
+function Home({ books, changeShelf, openSearch }) {
+  const shelfs = [
+    { title: 'Currently Reading', status: 'currentlyReading' },
+    { title: 'Want to Read', status: 'wantToRead' },
+    { title: 'Read', status: 'read' },
+  ];
   return (
     <div className='list-books'>
       <div className='list-books-title'>

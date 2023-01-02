@@ -6,11 +6,6 @@ import Search from '../pages/Search';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
-  const shelfs = [
-    { title: 'Currently Reading', status: 'currentlyReading' },
-    { title: 'Want to Read', status: 'wantToRead' },
-    { title: 'Read', status: 'read' },
-  ];
   const [books, setBooks] = useState([]);
 
   const getBooks = async () => {
@@ -21,7 +16,6 @@ function App() {
   useEffect(() => {
     getBooks();
   }, []);
-  console.log(books);
 
   const changeShelf = async (book, shelf) => {
     await update(book, shelf);
@@ -33,9 +27,7 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={
-            <Home shelfs={shelfs} books={books} changeShelf={changeShelf} />
-          }
+          element={<Home books={books} changeShelf={changeShelf} />}
         />
         <Route
           path='/search'

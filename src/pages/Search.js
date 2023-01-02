@@ -12,7 +12,6 @@ const Search = ({ changeShelf, mainBooks }) => {
       try {
         if (query) {
           const books = await search(query);
-          console.log(books);
           setSearchResults(books);
         } else {
           setSearchResults([]);
